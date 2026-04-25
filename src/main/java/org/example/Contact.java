@@ -7,16 +7,21 @@ public class Contact {
     private String firstName;
     private String lastName;
     private String city;
+    private String state;
+    private String zip;
 
-    public Contact(String firstName, String lastName, String city) {
+    public Contact(String firstName, String lastName, String city, String state, String zip) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.city = city;
+        this.state = state;
+        this.zip = zip;
     }
 
     public String getFirstName() {
         return firstName;
     }
+
     public String getLastName() {
         return lastName;
     }
@@ -25,27 +30,29 @@ public class Contact {
         return city;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
     public void setCity(String city) {
         this.city = city;
     }
 
     @Override
     public boolean equals(Object o) {
-        // equals → used by contains() to check duplicate
-
         if (this == o) return true;
-
         if (!(o instanceof Contact)) return false;
 
         Contact c = (Contact) o;
-
         return firstName.equals(c.firstName);
-        // duplicate logic → same name means same person
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(firstName);
-        // hashCode → required when overriding equals
     }
 }

@@ -23,13 +23,9 @@ public class AddressBookService {
     public List<Contact> searchByCity(String city) {
 
         return books.values().stream()
-                // stream → process all books
-
                 .flatMap(book -> book.getContacts().stream())
-                // combine all contacts
-
                 .filter(c -> c.getCity().equals(city))
-                // filter → search
+                // filter → search by city (UC8)
 
                 .toList();
     }
@@ -39,36 +35,55 @@ public class AddressBookService {
         return books.values().stream()
                 .flatMap(book -> book.getContacts().stream())
                 .collect(Collectors.groupingBy(Contact::getCity));
-        // groupingBy → group contacts by city (UC9)
+        // grouping → UC9
     }
 
     public long countByCity(String city) {
 
         return books.values().stream()
-                // stream → process all books
-
                 .flatMap(book -> book.getContacts().stream())
-                // combine all contacts
-
                 .filter(c -> c.getCity().equals(city))
-                // filter → match city
-
                 .count();
-        // count → total number of contacts (UC10)
+        // count → UC10
     }
 
     public List<Contact> sortByName() {
 
         return books.values().stream()
-                // stream → process all books
-
                 .flatMap(book -> book.getContacts().stream())
-                // combine all contacts
-
                 .sorted(Comparator.comparing(Contact::getFirstName))
-                // sorted → sort contacts by first name (UC11)
+                // sort by name → UC11
 
                 .toList();
-        // convert stream → list
+    }
+
+    public List<Contact> sortByCity() {
+
+        return books.values().stream()
+                .flatMap(book -> book.getContacts().stream())
+                .sorted(Comparator.comparing(Contact::getCity))
+                // sort by city → UC12
+
+                .toList();
+    }
+
+    public List<Contact> sortByState() {
+
+        return books.values().stream()
+                .flatMap(book -> book.getContacts().stream())
+                .sorted(Comparator.comparing(Contact::getState))
+                // sort by state
+
+                .toList();
+    }
+
+    public List<Contact> sortByZip() {
+
+        return books.values().stream()
+                .flatMap(book -> book.getContacts().stream())
+                .sorted(Comparator.comparing(Contact::getZip))
+                // sort by zip
+
+                .toList();
     }
 }
