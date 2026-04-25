@@ -8,21 +8,26 @@ public class Contact {
     // encapsulation → data hiding
 
     public Contact(String firstName, String lastName, String city) {
-        // constructor → initialize object at creation time
+        // constructor → initialize object
         this.firstName = firstName;
         this.lastName = lastName;
         this.city = city;
     }
 
     public String getFirstName() {
-        return firstName; // getter → access private data
+        return firstName;
     }
 
     public String getLastName() {
-        return lastName; // used in testing
+        return lastName;
     }
 
     public String getCity() {
         return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+        // setter → required to update existing value (UC3)
     }
 }
