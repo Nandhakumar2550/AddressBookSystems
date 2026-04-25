@@ -15,7 +15,7 @@ public class Contact {
     }
 
     public String getFirstName() {
-        return firstName;
+        return firstName; // getter → access private data
     }
 
     public String getLastName() {
@@ -28,6 +28,6 @@ public class Contact {
 
     public void setCity(String city) {
         this.city = city;
-        // setter → required to update existing value (UC3)
+        // setter → used to update value (UC3)
     }
 }

@@ -6,28 +6,35 @@ import java.util.List;
 public class AddressBook {
 
     private List<Contact> contacts = new ArrayList<>();
-    // List → store multiple contacts
+    // List → store multiple contacts (collection concept)
 
     public void addContact(Contact contact) {
         contacts.add(contact);
-        // UC2 → add contact
+        // UC2 → add contact into list
     }
 
     public List<Contact> getContacts() {
         return contacts;
+        // getter → used for testing & access
     }
 
     public void editContact(String name, String newCity) {
 
         for (Contact c : contacts) {
-            // loop → search contact
+            // loop → iterate to find contact
 
             if (c.getFirstName().equals(name)) {
-                // match by name
+                // equals → match contact by name
 
                 c.setCity(newCity);
-                // update using setter → UC3 main logic
+                // setter → update value (UC3)
             }
         }
+    }
+
+    public void deleteContact(String name) {
+
+        contacts.removeIf(c -> c.getFirstName().equals(name));
+        // removeIf → delete matching contact directly (UC4, Java 8 feature)
     }
 }

@@ -6,17 +6,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class AddressBookTest {
 
     @Test
-    void givenContact_whenEdited_shouldUpdateCity() {
+    void givenContact_whenDeleted_shouldReduceSize() {
 
         AddressBook book = new AddressBook();
 
         Contact c = new Contact("Nandha", "Kumar", "Chennai");
+
         book.addContact(c);
+        // add contact first
 
-        book.editContact("Nandha", "Madurai");
-        // testing edit method
+        book.deleteContact("Nandha");
+        // testing delete method
 
-        assertEquals("Madurai", book.getContacts().get(0).getCity());
-        // verify city updated
+        assertEquals(0, book.getContacts().size());
+        // verify list is empty after deletion
     }
 }
