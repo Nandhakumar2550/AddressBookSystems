@@ -37,4 +37,13 @@ public class AddressBook {
         contacts.removeIf(c -> c.getFirstName().equals(name));
         // removeIf → delete matching contact directly (UC4, Java 8 feature)
     }
+    public void addUniqueContact(Contact contact) {
+
+        if (!contacts.contains(contact)) {
+            // contains() → checks duplicate using equals()
+
+            contacts.add(contact);
+            // add only if not duplicate
+        }
+    }
 }

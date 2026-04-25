@@ -20,4 +20,19 @@ class AddressBookTest {
         assertEquals(2, book.getContacts().size());
         // verify multiple contacts stored
     }
+    @Test
+    void givenDuplicateContact_whenAdded_shouldNotIncreaseSize() {
+
+        AddressBook book = new AddressBook();
+
+        Contact c1 = new Contact("Nandha", "Kumar", "Chennai");
+        Contact c2 = new Contact("Nandha", "Kumar", "Madurai");
+
+        book.addUniqueContact(c1);
+        book.addUniqueContact(c2);
+        // same name → should be treated as duplicate
+
+        assertEquals(1, book.getContacts().size());
+        // verify duplicate not added
+    }
 }
