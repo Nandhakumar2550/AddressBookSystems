@@ -3,25 +3,33 @@ package org.example;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 class AddressBookServiceTest {
 
     @Test
-    void givenContacts_whenCountedByCity_shouldReturnCorrectCount() {
+    void givenContacts_whenSortedByName_shouldReturnSortedList() {
 
         AddressBookService service = new AddressBookService();
+        // create service object
 
         service.addAddressBook("Home");
+        // add address book
 
         service.getAddressBook("Home")
-                .addContact(new Contact("Nandha", "Kumar", "Chennai"));
+                .addContact(new Contact("Zara", "Khan", "Chennai"));
 
         service.getAddressBook("Home")
-                .addContact(new Contact("Arun", "Raj", "Chennai"));
+                .addContact(new Contact("Arun", "Raj", "Madurai"));
+        // add multiple contacts
 
-        long count = service.countByCity("Chennai");
-        // testing count method
+        List<Contact> result = service.sortByName();
+        // call sorting method (UC11)
 
-        assertEquals(2, count);
-        // verify result
+        assertEquals("Arun", result.get(0).getFirstName());
+        // verify first element (alphabetically smallest)
+
+        assertEquals("Zara", result.get(1).getFirstName());
+        // verify second element
     }
 }

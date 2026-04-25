@@ -39,7 +39,7 @@ public class AddressBookService {
         return books.values().stream()
                 .flatMap(book -> book.getContacts().stream())
                 .collect(Collectors.groupingBy(Contact::getCity));
-        // UC9 grouping
+        // groupingBy → group contacts by city (UC9)
     }
 
     public long countByCity(String city) {
@@ -55,5 +55,20 @@ public class AddressBookService {
 
                 .count();
         // count → total number of contacts (UC10)
+    }
+
+    public List<Contact> sortByName() {
+
+        return books.values().stream()
+                // stream → process all books
+
+                .flatMap(book -> book.getContacts().stream())
+                // combine all contacts
+
+                .sorted(Comparator.comparing(Contact::getFirstName))
+                // sorted → sort contacts by first name (UC11)
+
+                .toList();
+        // convert stream → list
     }
 }
