@@ -26,16 +26,23 @@ public class AddressBookService {
                 // stream → process all books
 
                 .flatMap(book -> book.getContacts().stream())
-                // flatMap → combine all contacts
+                // combine all contacts
 
                 .filter(c -> c.getCity().equals(city))
-                // filter → search condition
+                // filter → search
 
                 .toList();
-        // convert to list (UC8)
     }
 
     public Map<String, List<Contact>> groupByCity() {
+
+        return books.values().stream()
+                .flatMap(book -> book.getContacts().stream())
+                .collect(Collectors.groupingBy(Contact::getCity));
+        // UC9 grouping
+    }
+
+    public long countByCity(String city) {
 
         return books.values().stream()
                 // stream → process all books
@@ -43,7 +50,10 @@ public class AddressBookService {
                 .flatMap(book -> book.getContacts().stream())
                 // combine all contacts
 
-                .collect(Collectors.groupingBy(Contact::getCity));
-        // groupingBy → group contacts by city (UC9)
+                .filter(c -> c.getCity().equals(city))
+                // filter → match city
+
+                .count();
+        // count → total number of contacts (UC10)
     }
 }
