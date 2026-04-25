@@ -1,7 +1,7 @@
 package org.example;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class AddressBookService {
 
@@ -10,16 +10,28 @@ public class AddressBookService {
 
     public void addAddressBook(String name) {
         books.put(name, new AddressBook());
-        // put() → add new AddressBook
     }
 
     public AddressBook getAddressBook(String name) {
         return books.get(name);
-        // get() → retrieve AddressBook
     }
 
     public int getCount() {
         return books.size();
-        // getter → safe way to access size (encapsulation)
+    }
+
+    public List<Contact> searchByCity(String city) {
+
+        return books.values().stream()
+                // stream() → process all address books
+
+                .flatMap(book -> book.getContacts().stream())
+                // flatMap → combine all contact lists into one stream
+
+                .filter(c -> c.getCity().equals(city))
+                // filter → select matching city
+
+                .collect(Collectors.toList());
+        // collect → convert stream to List
     }
 }

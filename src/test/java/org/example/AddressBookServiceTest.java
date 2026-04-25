@@ -3,19 +3,28 @@ package org.example;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 class AddressBookServiceTest {
 
     @Test
-    void givenMultipleAddressBooks_whenAdded_shouldReturnCorrectCount() {
+    void givenContactsInMultipleBooks_whenSearchedByCity_shouldReturnResults() {
 
         AddressBookService service = new AddressBookService();
-        // create service object
 
         service.addAddressBook("Home");
         service.addAddressBook("Office");
-        // add multiple address books
 
-        assertEquals(2, service.getCount());
-        // verify using getter
+        service.getAddressBook("Home")
+                .addContact(new Contact("Nandha", "Kumar", "Chennai"));
+
+        service.getAddressBook("Office")
+                .addContact(new Contact("Arun", "Raj", "Chennai"));
+
+        List<Contact> result = service.searchByCity("Chennai");
+        // testing search using stream
+
+        assertEquals(2, result.size());
+        // verify both contacts found
     }
 }
