@@ -6,19 +6,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class AddressBookTest {
 
     @Test
-    void givenContact_whenDeleted_shouldReduceSize() {
+    void givenMultipleContacts_whenAdded_shouldReturnCorrectCount() {
 
         AddressBook book = new AddressBook();
 
-        Contact c = new Contact("Nandha", "Kumar", "Chennai");
+        Contact c1 = new Contact("Nandha", "Kumar", "Chennai");
+        Contact c2 = new Contact("Arun", "Raj", "Madurai");
 
-        book.addContact(c);
-        // add contact first
+        book.addContact(c1);
+        book.addContact(c2);
+        // calling addContact multiple times → UC5 concept
 
-        book.deleteContact("Nandha");
-        // testing delete method
-
-        assertEquals(0, book.getContacts().size());
-        // verify list is empty after deletion
+        assertEquals(2, book.getContacts().size());
+        // verify multiple contacts stored
     }
 }
